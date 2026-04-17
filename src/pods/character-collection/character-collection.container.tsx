@@ -5,21 +5,31 @@ import { useCharacterCollection } from './character-collection.hook';
 import { CharacterCollectionComponent } from './character-collection.component';
 
 export const CharacterCollectionContainer = () => {
-  const { characterCollection, loadCharacterCollection } = useCharacterCollection();
+  const { characterCollection, page, totalPages, setPage, search, onSearch } = useCharacterCollection();
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    loadCharacterCollection();
+    setPage(page);
+    // eslint-disable-next-line
   }, []);
 
   const handleDetail = (id: number) => {
     navigate(linkRoutes.characterDetail(id.toString()));
   };
 
+  const handlePageChange = (newPage: number) => {
+    setPage(newPage);
+  };
+
   return (
     <CharacterCollectionComponent
       characterCollection={characterCollection}
       onDetail={handleDetail}
+      page={page}
+      totalPages={totalPages}
+      onPageChange={handlePageChange}
+      search={search}
+      onSearch={onSearch}
     />
   );
 };

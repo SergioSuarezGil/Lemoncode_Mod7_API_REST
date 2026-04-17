@@ -15,11 +15,22 @@ app.use(logger());
 app.use('/api/*', cors());
 
 app.get('/api/character', async (context) => {
+  const skip = Number(context.req.query('skip') ?? 0);
+  const limit = Number(context.req.query('limit') ?? 5);
+  const name = context.req.query('name')?.toLowerCase() ?? '';
+
+  let filtered = db.characters;
+  if (name) {
+    filtered = filtered.filter((c) => c.name.toLowerCase().includes(name));
+  }
+  const count = filtered.length;
+  const results = filtered.slice(skip, skip + limit);
+
   const response: CharacterListResponse = {
     info: {
-      count: db.characters.length,
+      count,
     },
-    results: db.characters,
+    results,
   };
   return context.json(response);
 });

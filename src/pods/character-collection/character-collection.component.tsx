@@ -1,23 +1,42 @@
 import * as React from 'react';
-import { CharacterEntityVm } from './character-collection.vm';
+import { Pagination } from '../../common/components/pagination.component';
+import {
+  formContainer,
+  searchInput,
+  searchButton,
+  characterList,
+  characterItem,
+  characterImage,
+} from './character-collection.styles';
+import { CharacterCollectionComponentProps } from './character-collection.model';
 
-interface Props {
-  characterCollection: CharacterEntityVm[];
-  onDetail: (id: number) => void;
-}
+export const CharacterCollectionComponent: React.FunctionComponent<CharacterCollectionComponentProps> = (props) => {
+  const { characterCollection, onDetail, page, totalPages, onPageChange, search, onSearch } = props;
+  const [input, setInput] = React.useState(search);
 
-export const CharacterCollectionComponent: React.FunctionComponent<Props> = (
-  props
-) => {
-  const { characterCollection, onDetail } = props;
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    onSearch(input);
+  };
 
   return (
     <div>
       <h2>Personajes de Rick & Morty</h2>
-      <ul style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', listStyle: 'none', padding: 0 }}>
+      <form onSubmit={handleSubmit} className={formContainer}>
+        <input
+          type="text"
+          placeholder="Buscar personaje por nombre..."
+          value={input}
+          onChange={e => setInput(e.target.value)}
+          className={searchInput}
+        />
+        <button type="submit" className={searchButton}>Buscar</button>
+      </form>
+      <ul className={characterList}>
         {characterCollection.map((character) => (
-          <li key={character.id} style={{ width: 200, cursor: 'pointer' }} onClick={() => onDetail(character.id)}>
-            <img src={character.image} alt={character.name} style={{ width: '100%', borderRadius: 8 }} />
+          <li key={character.id} className={characterItem} onClick={() => onDetail(character.id)}>
+            <img src={character.image} alt={character.name} className={characterImage} />
             <div>
               <strong>{character.name}</strong>
               <div>{character.species}</div>
@@ -25,6 +44,7 @@ export const CharacterCollectionComponent: React.FunctionComponent<Props> = (
           </li>
         ))}
       </ul>
+      <Pagination page={page} totalPages={totalPages} onPageChange={onPageChange} />
     </div>
   );
 };

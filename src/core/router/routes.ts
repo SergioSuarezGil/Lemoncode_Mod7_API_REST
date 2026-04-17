@@ -1,22 +1,11 @@
 import { generatePath } from 'react-router';
-
-interface SwitchRoutes {
-  root: string;
-  characterCollection: string;
-  characterDetail: string;
-}
+import type { SwitchRoutes, LinkRoutes, NavigationFunction } from './routes.model';
 
 export const switchRoutes: SwitchRoutes = {
   root: '/',
   characterCollection: '/characters',
   characterDetail: '/characters/:id',
 };
-
-type NavigationFunction = (id: string) => string;
-
-interface LinkRoutes extends Omit<SwitchRoutes, 'characterDetail'> {
-  characterDetail: NavigationFunction;
-}
 
 export const linkRoutes: LinkRoutes = {
   ...switchRoutes,

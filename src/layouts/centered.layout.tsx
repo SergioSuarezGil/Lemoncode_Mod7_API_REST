@@ -1,10 +1,9 @@
-import React from 'react';
+
+
+import * as React from 'react';
+import { CenteredLayoutProps } from './centered.layout.model';
 import * as classes from './centered.layout.styles';
 
-interface Props {
-  children: React.ReactNode;
-}
-
-export const CenteredLayout: React.FC<Props> = (props) => (
+export const CenteredLayout: React.FC<CenteredLayoutProps> = (props) => (
   <div className={classes.root}>{props.children}</div>
 );

@@ -1,7 +1,7 @@
-import React from 'react';
-import { cx } from '@emotion/css';
+import * as React from 'react';
 import { useField } from 'formik';
 import { TextField as MuiTextField, TextFieldProps } from '@mui/material';
+import { cx } from '@emotion/css';
 import * as classes from './text-field.styles';
 
 export const TextFieldComponent: React.FunctionComponent<TextFieldProps> = (

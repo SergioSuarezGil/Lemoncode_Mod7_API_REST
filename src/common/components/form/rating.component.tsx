@@ -1,17 +1,10 @@
-import React from 'react';
-import { Rating, Typography } from '@mui/material';
+
+import * as React from 'react';
 import { useField } from 'formik';
+import { Rating, Typography } from '@mui/material';
+import { RatingProps } from './rating.model';
 
-interface Props {
-  name: string;
-  max: number;
-  value?: string;
-  onChange?: (value: string) => void;
-  error?: boolean;
-  helperText?: string;
-}
-
-export const RatingComponent: React.FunctionComponent<Props> = (props) => {
+export const RatingComponent: React.FunctionComponent<RatingProps> = (props) => {
   const { name, max, value, onChange, error } = props;
 
   const [field, meta, helpers] = Boolean(name) ? useField(name) : [];

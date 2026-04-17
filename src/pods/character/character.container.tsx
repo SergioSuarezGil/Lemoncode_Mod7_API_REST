@@ -4,6 +4,7 @@ import { getCharacter, updateCharacter } from './api/character.api';
 import { mapFromApiToVm, mapFromVmToApi } from './character.mappers';
 import { CharacterComponent } from './character.component';
 import { CharacterEditComponent } from './character-edit.component';
+import { saveContainer, saveStatus, saveStatusSuccess } from './character.styles';
 import { CharacterVm } from './character.vm';
 
 export const CharacterContainer: React.FunctionComponent = () => {
@@ -38,10 +39,10 @@ export const CharacterContainer: React.FunctionComponent = () => {
   return (
     <>
       <CharacterComponent character={character} />
-      <div style={{ textAlign: 'center', marginTop: 16 }}>
+      <div className={saveContainer}>
         <button onClick={() => setEditMode(true)} disabled={saving}>Editar mejor frase</button>
-        {saving && <span style={{ marginLeft: 8 }}>Guardando...</span>}
-        {saved && <span style={{ marginLeft: 8, color: 'green' }}>¡Guardado!</span>}
+        {saving && <span className={saveStatus}>Guardando...</span>}
+        {saved && <span className={saveStatusSuccess}>¡Guardado!</span>}
       </div>
     </>
   );

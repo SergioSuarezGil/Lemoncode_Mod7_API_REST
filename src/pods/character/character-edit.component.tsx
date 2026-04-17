@@ -1,12 +1,15 @@
 import * as React from 'react';
 import { CharacterVm } from './character.vm';
+import { CharacterEditProps } from './character-edit.model';
+import {
+  characterCard,
+  characterImage,
+  characterInfo,
+  textArea,
+  saveButton,
+} from './character.styles';
 
-interface Props {
-  character: CharacterVm;
-  onSave: (character: CharacterVm) => void;
-}
-
-export const CharacterEditComponent: React.FunctionComponent<Props> = ({ character, onSave }) => {
+export const CharacterEditComponent: React.FunctionComponent<CharacterEditProps> = ({ character, onSave }) => {
   const [bestSentence, setBestSentence] = React.useState(character.bestSentence || '');
 
   const handleSave = () => {
@@ -14,22 +17,22 @@ export const CharacterEditComponent: React.FunctionComponent<Props> = ({ charact
   };
 
   return (
-    <div style={{ maxWidth: 400, margin: '2rem auto', border: '1px solid #ccc', borderRadius: 8, padding: 24 }}>
-      <img src={character.image} alt={character.name} style={{ width: '100%', borderRadius: 8 }} />
+    <div className={characterCard}>
+      <img src={character.image} alt={character.name} className={characterImage} />
       <h2>{character.name}</h2>
       <div><strong>Especie:</strong> {character.species}</div>
       <div><strong>Estado:</strong> {character.status}</div>
       <div><strong>Género:</strong> {character.gender}</div>
-      <div style={{ marginTop: 16 }}>
+      <div className={characterInfo}>
         <strong>Mejor frase:</strong>
         <textarea
           value={bestSentence}
           onChange={e => setBestSentence(e.target.value)}
           rows={3}
-          style={{ width: '100%', marginTop: 8 }}
+          className={textArea}
         />
       </div>
-      <button style={{ marginTop: 16 }} onClick={handleSave}>Guardar</button>
+      <button className={saveButton} onClick={handleSave}>Guardar</button>
     </div>
   );
 };
