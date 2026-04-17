@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Pagination } from '../../common/components/pagination.component';
+import { useNavigate } from 'react-router-dom';
 import {
   formContainer,
   searchInput,
@@ -8,12 +8,14 @@ import {
   characterItem,
   characterImage,
 } from './character-collection.styles';
+import { backButton, title } from './character-collection.component.styles';
+import { Pagination } from '../../common/components/pagination.component';
 import { CharacterCollectionComponentProps } from './character-collection.model';
 
 export const CharacterCollectionComponent: React.FunctionComponent<CharacterCollectionComponentProps> = (props) => {
   const { characterCollection, onDetail, page, totalPages, onPageChange, search, onSearch } = props;
   const [input, setInput] = React.useState(search);
-
+  const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -22,7 +24,8 @@ export const CharacterCollectionComponent: React.FunctionComponent<CharacterColl
 
   return (
     <div>
-      <h2>Personajes de Rick & Morty</h2>
+      {/* Botón volver solo en el detalle, no aquí */}
+      <h2 className={title}>Personajes de Rick & Morty</h2>
       <form onSubmit={handleSubmit} className={formContainer}>
         <input
           type="text"

@@ -5,13 +5,23 @@ export const paginationContainer = css`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 0.50rem;
+  gap: 0.5rem;
 `;
 
 export const paginationButton = css`
-  min-width: 2.00rem;
+  padding: 0.5rem 1rem;
+  background: #f5f5f5;
+  border-radius: 0.1rem;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  color: #333;
+  &:disabled {
+    opacity: 0.2;
+    cursor: not-allowed;
+  }
 `;
 
 export const paginationButtonActive = css`
-  font-weight: bold;
+  background: #e0e0e0;
+  border-color: #888;
 `;

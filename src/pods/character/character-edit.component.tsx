@@ -31,8 +31,10 @@ export const CharacterEditComponent: React.FunctionComponent<CharacterEditProps>
           rows={3}
           className={textArea}
         />
+        <div>
+          <button className={saveButton} onClick={handleSave}>Guardar</button>
+        </div>
       </div>
-      <button className={saveButton} onClick={handleSave}>Guardar</button>
     </div>
   );
 };

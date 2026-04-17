@@ -1,8 +1,6 @@
-import { Character } from "./model.js";
-
+import { Character } from './model.js';
 
 export const characters: Character[] = [
-  // Personajes originales
   {
     id: 1,
     name: 'Rick Sanchez',
@@ -133,7 +131,6 @@ export const characters: Character[] = [
     url: 'https://rickandmortyapi.com/api/character/5',
     created: '2017-11-04T19:26:56.301Z',
   },
-  // Personajes generados
   ...Array.from({ length: 45 }, (_, i) => {
     const id = i + 6;
     return {
@@ -148,8 +145,12 @@ export const characters: Character[] = [
         url: id % 2 === 0 ? 'https://rickandmortyapi.com/api/location/1' : '',
       },
       location: {
-        name: id % 2 === 0 ? 'Citadel of Ricks' : 'Earth (Replacement Dimension)',
-        url: id % 2 === 0 ? 'https://rickandmortyapi.com/api/location/3' : 'https://rickandmortyapi.com/api/location/20',
+        name:
+          id % 2 === 0 ? 'Citadel of Ricks' : 'Earth (Replacement Dimension)',
+        url:
+          id % 2 === 0
+            ? 'https://rickandmortyapi.com/api/location/3'
+            : 'https://rickandmortyapi.com/api/location/20',
       },
       image: `https://rickandmortyapi.com/api/character/avatar/${id}.jpeg`,
       episode: [
