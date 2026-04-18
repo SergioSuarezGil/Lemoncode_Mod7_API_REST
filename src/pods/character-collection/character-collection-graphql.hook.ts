@@ -5,8 +5,8 @@ import { mapFromApiToVm } from './character-collection.mapper';
 export const useCharacterCollectionGraphqlVm = () => {
   const [page, setPage] = React.useState(1);
   const [search, setSearch] = React.useState('');
-  const limit = 14;
-  const { characters, info, loading, error } = useCharacterCollectionGraphql(page, search, limit);
+  const LIMIT = 14;
+  const { characters, info, loading, error } = useCharacterCollectionGraphql(page, search, LIMIT);
 
   const characterCollection = React.useMemo(
     () =>

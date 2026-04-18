@@ -7,10 +7,10 @@ export const Pagination: React.FC<PaginationProps> = ({ page, totalPages, onPage
   if (totalPages <= 1) return null;
 
 
-  const maxPagesToShow = 10;
-  const currentBlock = Math.floor((page - 1) / maxPagesToShow);
-  const startPage = currentBlock * maxPagesToShow + 1;
-  const endPage = Math.min(startPage + maxPagesToShow - 1, totalPages);
+  const MAX_PAGES_TO_SHOW = 10;
+  const currentBlock = Math.floor((page - 1) / MAX_PAGES_TO_SHOW);
+  const startPage = currentBlock * MAX_PAGES_TO_SHOW + 1;
+  const endPage = Math.min(startPage + MAX_PAGES_TO_SHOW - 1, totalPages);
 
   const renderPageButtons = () =>
     Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i).map((p) => (
