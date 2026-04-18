@@ -7,14 +7,17 @@ import { RatingProps } from './rating.model';
 export const RatingComponent: React.FunctionComponent<RatingProps> = (props) => {
   const { name, max, value, onChange, error } = props;
 
-  const [field, meta, helpers] = Boolean(name) ? useField(name) : [];
+  let field, meta, helpers;
+  if (name) {
+    [field, meta, helpers] = useField(name);
+  }
   const hasError = error || Boolean(meta && meta.error);
-  const helperText = Boolean(field) ? meta?.error : props.helperText;
+  const helperText = field ? meta?.error : props.helperText;
 
-  const handleChange = (_, value) => {
+  const handleChange = (_: any, value: any) => {
     if (onChange) {
       onChange(value);
-    } else {
+    } else if (helpers) {
       helpers.setValue(value);
     }
   };

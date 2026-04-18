@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Pagination } from '../../common/components/pagination.component';
 import {
+  mainContainer,
   formContainer,
   searchInput,
   searchButton,
@@ -8,6 +9,7 @@ import {
   characterItem,
   characterImage,
 } from './character-collection.styles';
+import { pageTitle, searchForm } from './character-collection.component.styles';
 import { CharacterCollectionComponentProps } from './character-collection.model';
 
 export const CharacterCollectionComponent: React.FunctionComponent<CharacterCollectionComponentProps> = (props) => {
@@ -21,9 +23,9 @@ export const CharacterCollectionComponent: React.FunctionComponent<CharacterColl
   };
 
   return (
-    <div>
-      <h2>Personajes de Rick & Morty</h2>
-      <form onSubmit={handleSubmit} className={formContainer}>
+    <div className={mainContainer}>
+      <h2 className={pageTitle}>Personajes de Rick & Morty</h2>
+      <form onSubmit={handleSubmit} className={`${formContainer} ${searchForm}`}>
         <input
           type="text"
           placeholder="Buscar personaje por nombre..."

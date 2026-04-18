@@ -1,13 +1,12 @@
 import { css } from '@emotion/css';
-import { theme } from '#core/theme';
 
 export const root = css`
-  display: grid;
-  grid-template-columns: 1fr;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
   margin-top: 2rem;
-
-  @media (min-width: ${theme.breakpoints.values.sm}px) {
-    justify-items: center;
-  }
+  width: 100vw;
+  box-sizing: border-box;
 `;

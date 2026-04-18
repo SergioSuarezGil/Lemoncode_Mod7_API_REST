@@ -9,9 +9,12 @@ export const TextFieldComponent: React.FunctionComponent<TextFieldProps> = (
 ) => {
   const { name, onChange, onBlur, value, error, slotProps } = props;
 
-  const [field, meta] = Boolean(name) ? useField(name) : [];
+  let field, meta;
+  if (name) {
+    [field, meta] = useField(name);
+  }
   const hasError = error || Boolean(meta && meta.touched && meta.error);
-  const helperText = Boolean(field) ? meta?.error : props.helperText;
+  const helperText = field ? meta?.error : props.helperText;
 
   return (
     <MuiTextField

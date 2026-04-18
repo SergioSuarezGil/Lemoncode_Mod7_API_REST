@@ -6,8 +6,14 @@ import { PaginationProps } from './pagination.model';
 export const Pagination: React.FC<PaginationProps> = ({ page, totalPages, onPageChange }) => {
   if (totalPages <= 1) return null;
 
+
+  const maxPagesToShow = 10;
+  const currentBlock = Math.floor((page - 1) / maxPagesToShow);
+  const startPage = currentBlock * maxPagesToShow + 1;
+  const endPage = Math.min(startPage + maxPagesToShow - 1, totalPages);
+
   const renderPageButtons = () =>
-    Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
+    Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i).map((p) => (
       <button
         key={p}
         onClick={() => onPageChange(p)}
@@ -31,7 +37,23 @@ export const Pagination: React.FC<PaginationProps> = ({ page, totalPages, onPage
       >
         &lt;
       </button>
+      {startPage > 1 && (
+        <button
+          onClick={() => onPageChange(startPage - 1)}
+          className={paginationButton}
+        >
+          ...
+        </button>
+      )}
       {renderPageButtons()}
+      {endPage < totalPages && (
+        <button
+          onClick={() => onPageChange(endPage + 1)}
+          className={paginationButton}
+        >
+          ...
+        </button>
+      )}
       <button
         onClick={() => onPageChange(page + 1)}
         disabled={page >= totalPages}

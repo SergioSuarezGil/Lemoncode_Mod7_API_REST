@@ -24,10 +24,13 @@ export const SelectComponent: React.FC<SelectComponentProps> = (props) => {
     className,
     ...otherProps
   } = props;
-  const [field, meta] = Boolean(name) ? useField(name) : [];
+  let field, meta;
+  if (name) {
+    [field, meta] = useField(name);
+  }
   const hasError = error || Boolean(meta && meta.touched && meta.error);
-  const helperText = Boolean(field) ? meta?.error : props.helperText;
-  const labelId = `${name}-label`;
+  const helperText = field ? meta?.error : props.helperText;
+  const labelId = name ? `${name}-label` : undefined;
 
   return (
     <FormControl

@@ -1,12 +1,17 @@
 
+
 import * as React from 'react';
 import { CharacterComponentProps } from './character.model';
+import { useNavigate } from 'react-router-dom';
 import { characterCard, characterImage, characterInfo, bestSentence } from './character.styles';
+import { backButton } from './character.component.styles';
 
 export const CharacterComponent: React.FunctionComponent<CharacterComponentProps> = ({ character }) => {
+  const navigate = useNavigate();
   return (
     <div className={characterCard}>
-      <img src={character.image} alt={character.name} style={{ width: '100%', borderRadius: 8 }} />
+      <button onClick={() => navigate(-1)} className={backButton}>&larr; Volver</button>
+      <img src={character.image} alt={character.name} className={characterImage} />
       <h2>{character.name}</h2>
       <div><strong>Especie:</strong> {character.species}</div>
       <div><strong>Estado:</strong> {character.status}</div>

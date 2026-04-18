@@ -9,7 +9,7 @@ export const paginationContainer = css`
 `;
 
 export const paginationButton = css`
-  min-width: 2.00rem;
+  min-width: 2rem;
 `;
 
 export const paginationButtonActive = css`

@@ -1,16 +1,26 @@
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { linkRoutes } from '#core/router';
-import { useCharacterCollection } from './character-collection.hook';
+import { useCharacterCollectionGraphqlVm } from './character-collection-graphql.hook';
 import { CharacterCollectionComponent } from './character-collection.component';
 
 export const CharacterCollectionContainer = () => {
-  const { characterCollection, page, totalPages, setPage, search, onSearch } = useCharacterCollection();
+  const graphql = useCharacterCollectionGraphqlVm();
   const navigate = useNavigate();
+
+  const {
+    characterCollection,
+    page,
+    totalPages,
+    setPage,
+    search,
+    onSearch,
+    loading,
+    error,
+  } = graphql;
 
   React.useEffect(() => {
     setPage(page);
-    // eslint-disable-next-line
   }, []);
 
   const handleDetail = (id: number) => {
@@ -22,14 +32,24 @@ export const CharacterCollectionContainer = () => {
   };
 
   return (
-    <CharacterCollectionComponent
-      characterCollection={characterCollection}
-      onDetail={handleDetail}
-      page={page}
-      totalPages={totalPages}
-      onPageChange={handlePageChange}
-      search={search}
-      onSearch={onSearch}
-    />
+    <>
+      <div style={{ marginBottom: 16 }}>
+        {loading && <span style={{ marginLeft: 16 }}>Cargando...</span>}
+        {error && (
+          <span style={{ color: 'red', marginLeft: 16 }}>
+            Error al cargar datos
+          </span>
+        )}
+      </div>
+      <CharacterCollectionComponent
+        characterCollection={characterCollection}
+        onDetail={handleDetail}
+        page={page}
+        totalPages={totalPages}
+        onPageChange={handlePageChange}
+        search={search}
+        onSearch={onSearch}
+      />
+    </>
   );
 };
